@@ -1,0 +1,86 @@
+1. Majority Element II (229)
+
+Solution : class Solution {
+    public List<Integer> majorityElement(int[] nums) {
+        int count=0;
+        List<Integer> list = new ArrayList<>();
+        Map<Integer,Integer> map=new HashMap<>();
+
+        for(int x : nums){
+            map.put(x,map.getOrDefault(x,0)+1);
+        }
+
+        for(int n : map.keySet()){
+            if(map.get(n)>(nums.length/3)){
+                list.add(n);
+            }
+        }
+        return list;
+    }
+}
+
+
+2. Left and Right Sum Differences  (2574)
+
+Solution :  class Solution {
+    public int leftrightsum(int[] nums, int n, int m) {
+        int sum = 0;
+        for (int i = n; i < m; i++) {
+            sum += nums[i];
+        }
+        return sum;
+    }
+
+    public int[] leftRightDifference(int[] nums) {
+        int[] ans = new int[nums.length];
+
+        ans[0] = Math.abs(leftrightsum(nums, 1, nums.length));
+
+        for (int i = 1; i < nums.length; i++) {
+            ans[i] = Math.abs(
+                leftrightsum(nums, i + 1, nums.length)
+                - leftrightsum(nums, 0, i)
+            );
+        }
+
+        return ans;
+    }
+}
+
+
+3. Contains Duplicate (217)
+
+Solution:  class Solution {
+    public boolean containsDuplicate(int[] nums) {
+       HashSet<Integer> set = new HashSet<>();
+
+for(int num : nums){
+    if(set.contains(num)){
+        return true;
+    }
+    set.add(num);
+}
+
+return false;
+    }
+}
+
+
+4. Contains Duplicate II  (219)
+
+Solution : class Solution {
+    public boolean containsNearbyDuplicate(int[] nums, int k) {
+        
+
+        HashMap<Integer,Integer> map=new HashMap<>();
+        for(int i=0;i<nums.length;i++){
+            if(map.containsKey(nums[i])){
+                if((i-map.get(nums[i]))<=k){
+                    return true;
+                }
+            }
+            map.put(nums[i],i);
+        }
+        return false;
+    }
+}
