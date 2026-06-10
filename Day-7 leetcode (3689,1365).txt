@@ -1,0 +1,37 @@
+1. Maximum Total Subarray Value I  (3689)
+
+Solution : class Solution {
+    public long maxTotalValue(int[] nums, int k) {
+        int maxVal = nums[0];
+        int minVal = nums[0];
+
+        for (int num : nums) {
+            maxVal = Math.max(maxVal, num);
+            minVal = Math.min(minVal, num);
+        }
+
+        return (long) k * (maxVal - minVal);
+    }
+}
+
+
+2. How Many Numbers Are Smaller Than the Current Number  (1365)
+
+Solution : class Solution {
+    public int[] smallerNumbersThanCurrent(int[] nums) {
+        int n=nums.length;
+        int[] res=new int[n];
+        int k=0;
+        for(int i=0;i<n;i++){
+           int count=0;
+            for(int j=0;j<n;j++){
+                if(nums[i]>nums[j]){
+                    count++;
+                }
+            }
+            res[k]=count;
+            k++;
+        }
+        return res;
+    }
+}
