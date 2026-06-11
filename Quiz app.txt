@@ -1,0 +1,114 @@
+(QUIZ APP)
+
+
+Project Structure :
+
+QuizAPP
+│
+├── JRE System Library [JavaSE-17]
+│
+└── src
+    │
+    └── Demo
+        │
+        └── QuizApplication.java
+
+
+Code:
+
+
+package Demo;
+
+import java.util.Scanner;
+
+public class QuizApplication {
+
+	@SuppressWarnings("resource")
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		//Scan
+		Scanner sc=new Scanner(System.in);
+		
+		//Questions
+		String[] question= {
+				 "Java is?",
+				 "Which company developed Java?",
+				 "Which keyword is used to create an object?"
+		};
+		
+		//Options
+		
+		String[][] options = {
+			    {"Language", "Database", "OS", "Browser"},
+			    {"Google", "Microsoft", "Sun Microsystems", "Apple"},
+			    {"new", "create", "object", "class"}
+			};
+		
+		//answers
+		int[] answers = {1, 3, 1};
+		
+		//Score
+		
+		int score=0;
+		
+		System.out.println("Quiz");
+		int ans;
+		int choice = 0;
+		while(choice !=2) {
+			System.out.println("Enter choice: ");
+			System.out.println("1. Play Quiz");
+			System.out.println("2. Exit from the quiz");
+            choice = sc.nextInt();
+			
+			switch(choice) {
+			case 1 :
+			score=0;
+			for (int i = 0; i < question.length; i++) {
+				
+				System.out.println("\nQ" + (i + 1) + ". " + question[i]);
+				for (int j = 0; j < options[i].length; j++) {
+		            System.out.println((j + 1) + ". " + options[i][j]);
+		        }
+				
+			    
+				do {
+				    System.out.print("Enter answer (1-4): ");
+				    ans = sc.nextInt();
+
+				    if (ans < 1 || ans > 4) {
+				        System.out.println("Invalid choice. Try again.");
+				    }
+
+				} while (ans < 1 || ans > 4);
+			    
+			    if (answers[i] == ans) {
+			        score++;
+			        System.out.println("Correct!");
+			    } else {
+			        System.out.println("Wrong!");
+			    }
+			    }
+			    
+			    double percentage = (score * 100.0) / question.length;
+
+			    System.out.println("\nQuiz Completed!");
+			    System.out.println("Score: " + score + "/" + question.length);
+			    System.out.println("Percentage: " + percentage + "%");
+			
+			break;
+			
+			case 2:	
+                 System.out.println("Exiting...");
+                 break;
+
+            default:
+                 System.out.println("Invalid choice");
+			
+			}
+		}
+		
+		
+
+	}
+
+}
