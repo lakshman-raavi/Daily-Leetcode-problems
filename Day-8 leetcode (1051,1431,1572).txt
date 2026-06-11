@@ -1,0 +1,62 @@
+1. Height Checker  (1051)
+
+Solutions : class Solution {
+    public int heightChecker(int[] heights) {
+        int n=heights.length;
+        int[] exp=new int[n];
+        int count=0;
+        
+        for(int i=0;i<n;i++){
+            exp[i]=heights[i];
+        }
+        Arrays.sort(exp);
+
+        for(int i=0;i<n;i++){
+            if(exp[i]!=heights[i]){
+                count++;
+            }
+        }
+
+        return count;
+    }
+}
+
+
+2. Kids With the Greatest Number of Candies  (1431)
+
+Solution : class Solution {
+    public List<Boolean> kidsWithCandies(int[] candies, int extraCandies) {
+        List<Boolean> list=new LinkedList<>();
+        int n=candies.length;
+        for(int i=0;i<n;i++){
+            int addex=candies[i]+extraCandies;
+            boolean is=true;
+            for(int j=0;j<n;j++){
+                if(addex<candies[j]){
+                    is=false;
+                }
+            }
+        list.add(is);
+        }
+        return list;
+    }
+}
+
+3. Matrix Diagonal Sum  (1572)
+
+Solution : class Solution {
+    public int diagonalSum(int[][] mat) {
+        int sum = 0;
+        int n = mat.length;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (i == j || i + j == n - 1) {
+                    sum += mat[i][j];
+                }
+            }
+        }
+
+        return sum;
+    }
+}
