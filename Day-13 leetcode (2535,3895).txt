@@ -1,0 +1,60 @@
+1. Difference Between Element Sum and Digit Sum of an Array  (2535)
+
+Solution : class Solution {
+
+    public int singlesum(int n){
+        int res=0;
+        while(n!=0){
+            res+=(n%10);
+            n/=10;
+        }
+        return res;
+    }
+    public int differenceOfSum(int[] nums) {
+        int arrsum=0;
+        int sum=0;
+        int n=nums.length;
+        for(int i=0;i<n;i++){
+            sum+=nums[i];
+            if(nums[i]>9){
+                arrsum+=singlesum(nums[i]);
+            }
+            else
+            arrsum+=nums[i];
+        }
+
+        return Math.abs(arrsum-sum);
+    }
+}
+
+
+
+2. Count Digit Appearances  (3895)
+
+Solution : class Solution {
+
+
+    public int countDigitOccurrences(int[] nums, int digit) {
+        int count=0;
+
+        int n=nums.length;
+
+        for(int i=0;i<n;i++){
+            if(nums[i]<10){
+                if(nums[i]==digit){
+                    count++;
+                }
+            }
+            else{
+            while(nums[i]!=0){
+                int dig=nums[i]%10;
+                if(dig==digit){
+                    count++;
+                }
+                nums[i]/=10;
+            }
+            }
+        }
+        return count;
+    }
+}
