@@ -1,0 +1,141 @@
+1. Maximum Number of Balloons (1189)
+
+Solution : class Solution {
+    public int maxNumberOfBalloons(String text) {
+        int n = text.length();
+        int[] vis = new int[n];
+        String pattern = "balloon";
+        int res = 0;
+
+        while (true) {
+            boolean formed = true;
+
+            for (int j = 0; j < pattern.length(); j++) {
+                boolean found = false;
+
+                for (int i = 0; i < n; i++) {
+                    if (vis[i] == 0 && text.charAt(i) == pattern.charAt(j)) {
+                        vis[i] = 1;
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found) {
+                    formed = false;
+                    break;
+                }
+            }
+
+            if (formed) {
+                res++;
+            } else {
+                break;
+            }
+        }
+
+        return res;
+    }
+}
+
+
+
+2. Minimum Number of Days to Make m Bouquets  (1482)
+
+Solution : class Solution {
+
+    public  int minval(int[] bloomDay){
+        int min=Integer.MAX_VALUE;
+        int n=bloomDay.length;
+        for(int i=0;i<n;i++){
+            if(bloomDay[i]<min){
+                min=bloomDay[i];
+            }
+        }
+        return min;
+    }
+
+    public  int maxval(int[] bloomDay){
+        int max=Integer.MIN_VALUE;
+        int n=bloomDay.length;
+        for(int i=0;i<n;i++){
+            if(bloomDay[i]>max){
+                max=bloomDay[i];
+            }
+        }
+        return max;
+    }
+
+    public int cal(int[] bloomDay,int mid,int k){
+        int n=bloomDay.length;
+        int noof=0;
+        int count=0;
+        for(int i=0;i<n;i++){
+            if(bloomDay[i]<=mid){
+                count++;
+            }
+            else{
+                noof+=(count/k);
+                count=0;
+            }
+        }
+        noof+=(count/k);
+        return noof;
+    }
+    public int minDays(int[] bloomDay, int m, int k) {
+        int low=minval(bloomDay),high=maxval(bloomDay);
+        int res=0;
+        int n=bloomDay.length;
+        if((long)k*m>n){
+            return -1;
+        }
+        int ans=0;
+        while(low<=high){
+
+            int mid=(low)+(high-low)/2;
+            if(cal(bloomDay,mid,k)>=m){
+                ans=mid;
+                high=mid-1;
+            }
+            else{
+                low=mid+1;
+            }
+            
+        }
+    return ans;
+    }
+}
+
+
+3. Find the Smallest Divisor Given a Threshold  (1283)
+
+Solution : class Solution {
+    public int smallestDivisor(int[] nums, int threshold) {
+
+        int n=nums.length;
+        int res=0;
+        int min=Integer.MAX_VALUE;
+        int max=Integer.MIN_VALUE;
+        for(int i=0;i<n;i++){
+            min=Math.min(min,nums[i]);
+            max=Math.max(max,nums[i]);
+        }
+        int ans=0;
+        int low=1,high=max;
+        while(low<=high){
+            int mid=low+(high-low)/2;
+            long sum=0;
+            for(int i=0;i<n;i++){
+                sum += (nums[i] + mid - 1) / mid;
+            }
+            if(sum<=threshold){
+                ans=mid;
+                high=mid-1;
+            }
+            else{
+                low=mid+1;
+            }
+        }
+        return ans;
+    }
+}
