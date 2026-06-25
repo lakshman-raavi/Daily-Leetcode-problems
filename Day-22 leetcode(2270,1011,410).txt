@@ -1,0 +1,141 @@
+1. Number of Ways to Split Array (2270)
+
+Solution : class Solution {
+    public int waysToSplitArray(int[] nums) {
+        int res = 0;
+        long s1 = 0;
+        long total = 0;
+
+        int n = nums.length;
+
+        for (int num : nums) {
+            total += num;
+        }
+
+        for (int i = 0; i < n - 1; i++) {
+            s1 += nums[i];
+            long s2 = total - s1;
+
+            if (s1 >= s2) {
+                res++;
+            }
+        }
+
+        return res;
+    }
+}
+
+
+2. Capacity To Ship Packages Within D Days (1011)
+
+Solution : class Solution {
+    public int maxVal(int[] weights){
+        int max=Integer.MIN_VALUE;
+
+        int n=weights.length;
+        for(int i=0;i<n;i++){
+            if(weights[i]>max){
+                max=weights[i];
+            }
+        }
+        return max;
+    }
+
+    public int sumVal(int[] weights){
+        int sum=0;
+        int n=weights.length;
+        for(int i=0;i<n;i++){
+            sum+=weights[i];
+        }
+        return sum;
+    }
+
+    public int funccal(int[] weights,int mid){
+        int ndays=1;
+        int curent=0;
+        int n=weights.length;
+        for(int i=0;i<n;i++){
+            if(curent+weights[i]<=mid){
+                curent+=weights[i];
+            }
+            else{
+                ndays++;
+                curent=weights[i];
+            }
+        }
+        return ndays;
+    }
+    public int shipWithinDays(int[] weights, int days) {
+        int low=maxVal(weights);
+        int high=sumVal(weights);
+
+        while(low<=high){
+            int mid=low+(high-low)/2;
+
+            if(funccal(weights,mid)>days){
+                low=mid+1;
+            }
+            else{
+                high=mid-1;;
+            }
+        }
+        return low;
+    }
+}
+
+
+3. Split Array Largest Sum (410)
+
+Solution : class Solution {
+
+    public int sumVal(int[] nums){
+        int n=nums.length;
+        int sum=0;
+        for(int i=0;i<n;i++){
+            sum+=nums[i];
+        }
+        return sum;
+    }
+
+    public int funCal(int[] nums,int mid){
+        int narr=1;
+        int p=0;
+        int n=nums.length;
+        for(int i=0;i<n;i++){
+            if(p+nums[i]<=mid){
+                p+=nums[i];
+            }
+            else{
+                narr++;
+                p=nums[i];
+            }
+        }
+        return narr;
+    }
+
+    public int maxVal(int[] nums){
+        int max=Integer.MIN_VALUE;
+        int n=nums.length;
+        for(int i=0;i<n;i++){
+            if(nums[i]>max){
+                max=nums[i];
+            }
+        }
+        return max;
+    }
+    public int splitArray(int[] nums, int k) {
+        int low=maxVal(nums);
+        int high=sumVal(nums);
+
+        while(low<=high){
+            int mid=(low)+(high-low)/2;
+            if(funCal(nums,mid)>k){
+                low=mid+1;
+            }
+            else{
+                high=mid-1;
+            }
+        }
+        return low;
+    }
+}
