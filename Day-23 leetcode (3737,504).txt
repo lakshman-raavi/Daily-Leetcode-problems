@@ -1,0 +1,46 @@
+1.  Count Subarrays With Majority Element I (3737)
+
+Solution : class Solution {
+    public int countMajoritySubarrays(int[] nums, int target) {
+        int n=nums.length;
+        int res=0;
+        for(int i=0;i<n;i++){
+            int count=0;
+            for(int j=i;j<n;j++){
+                if(nums[j]==target){
+                    count++;
+                }
+                int len=j-i+1;
+                if(count>(len/2)){
+                    res++;
+                }
+            }
+        }
+        return res;
+    }
+}
+
+
+2. Base 7  (504)
+
+Solution : class Solution {
+    public String convertToBase7(int num) {
+        StringBuilder sb=new StringBuilder();
+
+        if(num==0){
+            return ("0");
+        }
+        boolean negative = num < 0;
+        num = Math.abs(num);
+        while((num>0)){
+            sb.append(num%7);
+            num/=7;
+        }
+        sb.reverse();
+
+        if (negative)
+        sb.insert(0, '-');
+
+        return sb.toString();
+    }
+}
