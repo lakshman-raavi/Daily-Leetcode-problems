@@ -1,0 +1,134 @@
+1. Container With Most Water (5)
+
+Solution : class Solution {
+    public int maxArea(int[] height) {
+        int maxArea=Integer.MIN_VALUE;
+        int left=0;
+        int right=height.length-1;
+        while(left<right){
+            int currArea=(Math.min(height[left],height[right]))*(right-left);
+            maxArea=Math.max(maxArea,currArea);
+            if(height[left]<height[right]){
+                left++;
+            }
+            else{
+                right--;
+            }
+        }
+        return maxArea;
+    }
+}
+
+
+2. Longest Substring Without Repeating Characters  (3)
+
+Solution : class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int count=0;
+        int maxcount=0;
+        int left=0;
+        Map<Character,Integer> map=new HashMap<>();
+
+        int r=0;
+        while(r<s.length()){
+            char ch=s.charAt(r);
+            if(map.containsKey(ch)){
+                left=Math.max(left,map.get(ch)+1);
+            }
+            map.put(ch,r);
+            maxcount=Math.max(maxcount,(r-left+1));
+            r++;
+        }
+        return maxcount;
+    }
+}
+
+
+3. Longest Mountain in Array  (845)
+
+Solution : class Solution {
+    public int longestMountain(int[] arr) {
+        int n=arr.length;
+        int maxlen=0;
+        for(int i=1;i<n-1;i++){
+           
+                int count1=0;
+                int count2=0;
+                for(int j=i;j>0;j--){
+                    if(arr[j]>arr[j-1]){
+                        count1++;
+                    }
+                    else{
+                        break;
+                    }
+                }
+                for(int j=i;j<n-1;j++){
+                    if(arr[j]>arr[j+1]){
+                        count2++;
+                    }
+                    else{
+                        break;
+                    }
+                }
+                if(count1>0 && count2>0)
+                maxlen=Math.max(maxlen,count1+count2+1); 
+        }
+        return maxlen;
+    }
+}
+
+
+4. Maximum Element After Decreasing and Rearranging  (1846)
+
+Solution : class Solution {
+    public int maximumElementAfterDecrementingAndRearranging(int[] arr) {
+        int n=arr.length;
+        boolean found=false;
+        if(arr[0]!=1){
+            int i=0;
+            int j=0;
+            while(j<n){
+                if(arr[j]==1){
+                    found=true;
+                    int t=arr[j];
+                    arr[j]=arr[i];
+                    arr[i]=t;
+                    break;
+                }
+                j++;
+            }
+            if(!found){
+                arr[0]=1;
+            }
+        }
+
+        Arrays.sort(arr);
+        int max=arr[0];
+        for(int i=1;i<n;i++){
+            int diff=Math.abs(arr[i]-arr[i-1]);
+            if(diff>=2){
+                arr[i]=arr[i-1]+1;
+            }
+        }
+        for(int i=0;i<n;i++){
+            max=Math.max(max,arr[i]);
+        }
+       return max;
+
+    }
+}
+
+
+Optimal :  class Solution {
+    public int maximumElementAfterDecrementingAndRearranging(int[] arr) {
+        Arrays.sort(arr);
+
+        arr[0] = 1;
+
+        for (int i = 1; i < arr.length; i++) {
+            arr[i] = Math.min(arr[i], arr[i - 1] + 1);
+        }
+
+        return arr[arr.length - 1];
+    }
+}
