@@ -1,0 +1,120 @@
+1. Maximum Number of Vowels in a Substring of Given Length (1456)
+
+Solution : (Brute Force)
+
+class Solution {
+
+
+    public int countv(String s){
+        int l=0;
+        int r=s.length();
+        int count=0;
+        for(int i=0;i<r;i++){
+            char ch=s.charAt(i);
+            if("aeiou".indexOf(ch)!=-1){
+                count++;
+            }
+        }
+        return count;
+    
+    }
+    public int maxVowels(String s, int k) {
+        int n=s.length();
+        int i=0;
+        int j=i+k-1;
+        int c=0;
+        for(i=0;i<=(n-k) && j<n;i++,j++){
+            c=Math.max(countv(s.substring(i,j+1)),c);
+        }
+        return c;
+    }
+}
+
+
+Optimal :  class Solution {
+
+    public boolean isv(char ch){
+        return (ch=='a' || ch=='e' || ch=='i' || ch=='o' || ch=='u');
+    }
+
+    public int maxVowels(String s, int k) {
+        int count=0;
+        int n=s.length();
+        int max=Integer.MIN_VALUE;
+        for(int i=0;i<k;i++){
+            char ch=s.charAt(i);
+            if(isv(ch)){
+                count++;
+            }
+            max=Math.max(max,count);
+        }
+
+        for(int i=k;i<n;i++){
+            char ch=s.charAt(i);
+            if(isv(ch)){
+                count++;
+            }
+
+            if(isv(s.charAt(i-k))){
+                count--;
+            }
+
+            max=Math.max(max,count);
+        }
+        return max;
+    }
+}
+
+
+2. Number of Strings That Appear as Substrings in Word  (1967)
+
+Solution : class Solution {
+    public int numOfStrings(String[] patterns, String word) {
+        int count=0;
+
+        for(String str : patterns){
+            if(word.contains(str)){
+                count++;
+            }
+        }
+        return count;
+    }
+}
+
+
+3. Find All Anagrams in a String  (438)
+
+Solution : class Solution {
+    public List<Integer> findAnagrams(String s, String p) {
+        int plen=p.length();
+        int k=plen;
+        Map<Character,Integer> m1=new HashMap<>();
+        List<Integer> res=new ArrayList<>();
+        for(int i=0;i<plen;i++){
+            char ch=p.charAt(i);
+            m1.put(ch,m1.getOrDefault(ch,0)+1);
+        }
+        Map<Character,Integer> m2=new HashMap<>();
+        int left=0;
+        int slen=s.length();
+        for(int right=0;right<s.length();right++){
+            
+            char ch=s.charAt(right);
+            
+            while((right-left+1)>k){
+                char str=s.charAt(left);
+                m2.put(str, m2.get(str) - 1);
+                if(m2.get(str)==0){
+                    m2.remove(str);
+                }
+                left++;
+            }
+           m2.put(ch,m2.getOrDefault(ch,0)+1);
+            if(right - left + 1==k && m1.equals(m2)){
+                res.add((left));
+            }
+        }
+
+        return res;
+    }
+}
