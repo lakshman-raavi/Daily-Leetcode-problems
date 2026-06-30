@@ -1,0 +1,122 @@
+1.  Number of Substrings Containing All Three Characters (1358)
+
+Brute Force : class Solution {
+    public boolean funcal(String s){
+        int ac=0;
+        int bc=0;
+        int cc=0;
+        int n=s.length();
+        for(int i=0;i<n;i++){
+            char ch=s.charAt(i);
+            if(ch=='a'){
+                ac++;
+            }
+            else if(ch=='b'){
+                bc++;
+            }
+            else{
+                cc++;
+            }
+        }
+
+        if(ac>=1 && bc>=1 && cc>=1){
+            return true;
+        }
+        return false;
+    }
+    public int numberOfSubstrings(String s) {
+        int n=s.length();
+        int count=0;
+        for(int i=0;i<n-1;i++){
+            for(int j=i+2;j<n;j++){
+                if(funcal(s.substring(i,j+1))){
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+}
+
+
+Better :  class Solution {
+     public boolean funcal(String s){
+        int ac=0;
+        int bc=0;
+        int cc=0;
+        int n=s.length();
+        for(int i=0;i<n;i++){
+            char ch=s.charAt(i);
+            if(ch=='a'){
+                ac++;
+            }
+            else if(ch=='b'){
+                bc++;
+            }
+            else{
+                cc++;
+            }
+        }
+
+        if(ac>=1 && bc>=1 && cc>=1){
+            return true;
+        }
+        return false;
+    }
+
+    public int numberOfSubstrings(String s) {
+        int n=s.length();
+        int count=0;
+        int left=0;
+        for(int r=0;r<n;r++){
+	//Checking for the validity
+            while(funcal(s.substring(left,r+1))){
+                count+=n-r;
+                left++;
+            }
+        }
+        return count;
+    }
+}
+
+
+2. Find Greatest Common Divisor of Array  (1979)
+
+Solution : class Solution {
+    public int findGCD(int[] nums) {
+        int max=Integer.MIN_VALUE;
+        int min=Integer.MAX_VALUE;
+        for(int i=0;i<nums.length;i++){
+            max=Math.max(max,nums[i]);
+            min=Math.min(min,nums[i]);
+        }
+        int res=0;
+        for(int i=1;i<=2*max;i++){
+            if(min%i==0 && max%i==0){
+                res=Math.max(res,i);
+            }
+        }
+        return res;
+    }
+}
+
+
+3.  Check If Two String Arrays are Equivalent  (1662)
+
+Solution : class Solution {
+    public boolean arrayStringsAreEqual(String[] word1, String[] word2) {
+        StringBuilder s1=new StringBuilder();
+        StringBuilder s2=new StringBuilder();
+
+       for(int i=0;i<word1.length;i++){
+        s1.append(word1[i]);
+       }
+
+       for(int i=0;i<word2.length;i++){
+        s2.append(word2[i]);
+       }
+
+
+      return s1.toString().equals(s2.toString());
+    }
+}
