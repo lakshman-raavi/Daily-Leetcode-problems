@@ -1,0 +1,124 @@
+1.  Sort an Array  (912)
+
+Solution :  class Solution {
+
+    public void mergeSort(int[] arr, int l, int u) {
+        int mid;
+        if (l < u) {
+            mid = (l + u) / 2;
+            mergeSort(arr, l, mid);
+            mergeSort(arr, mid + 1, u);
+            mergefun(arr, l, mid, u);
+        }
+    }
+
+    public void mergefun(int[] arr, int l, int mid, int u) {
+        int i = l, k = l, j = mid + 1;
+        int n = arr.length;
+        int[] duplicatearr = new int[n];
+        while (i <= mid && j <= u) {
+            if (arr[i] <= arr[j]) {
+                duplicatearr[k] = arr[i];
+                i++;
+                k++;
+            } else {
+                duplicatearr[k] = arr[j];
+                j++;
+                k++;
+            }
+        }
+
+        while (i <= mid) {
+            duplicatearr[k] = arr[i];
+            i++;
+            k++;
+        }
+
+        while (j <= u) {
+            duplicatearr[k] = arr[j];
+            j++;
+            k++;
+        }
+        for (int p = l; p <= u; p++) {
+            arr[p] = duplicatearr[p];
+        }
+    }
+
+    public int[] sortArray(int[] nums) {
+        int n = nums.length;
+        mergeSort(nums, 0, n - 1);
+        return nums;
+    }
+}
+
+
+2. Relative Sort Array  (1122)
+
+Solution :  class Solution {
+    public int[] relativeSortArray(int[] arr1, int[] arr2) {
+        Map<Integer, Integer> map = new LinkedHashMap<>();
+        int n = arr1.length;
+        int[] res = new int[n];
+        int k = 0;
+        for (int num : arr1) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+
+        for (int num : arr2) {
+            int val = map.get(num);
+            for (int i = 0; i < val; i++) {
+                res[k] = num;
+                k++;
+            }
+            map.remove(num);
+        }
+
+        List<Map.Entry<Integer, Integer>> list = new ArrayList<>(map.entrySet());
+
+        list.sort((a, b) -> a.getKey() - b.getKey());
+
+        for (Map.Entry<Integer, Integer> entry : list) {
+            int key = entry.getKey();
+            int freq = entry.getValue();
+
+            while (freq-- > 0) {
+                res[k++] = key;
+            }
+        }
+
+        // for(int i=0;i<arr2.length;i++){
+        //     for(int j=0;j<n;j++){
+        //         if(arr2[i]==arr1[j]){
+        //             res[k]=arr[i];
+        //             k++;
+        //         }
+        //     }
+        // }
+
+        return res;
+    }
+}
+
+
+
+3. Maximum Ice Cream Bars  (1833)
+
+
+Solution :  class Solution {
+    public int maxIceCream(int[] costs, int coins) {
+        Arrays.sort(costs);
+
+        int sum=0;
+        int count=0;
+        for(int i=0;i<costs.length;i++){
+            sum+=costs[i];
+            if(sum<=coins){
+                count++;
+            }
+            else{
+                break;
+            }
+        }
+        return count;
+    }
+}
