@@ -1,0 +1,50 @@
+1.  Top K Frequent Elements  (347)
+
+Solution :  class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int num : nums) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+
+        List<Map.Entry<Integer, Integer>> list = new ArrayList<>(map.entrySet());
+
+        list.sort((a, b) -> b.getValue().compareTo(a.getValue()));
+
+        List<Integer> ans = new ArrayList<>();
+        int m = 0;
+
+        for (Map.Entry<Integer, Integer> entry : list) {
+            ans.add(entry.getKey());
+            k--;
+            if (k == 0) {
+                break;
+            }
+        }
+
+        return ans.stream().mapToInt((i -> i)).toArray();
+
+    }
+}
+
+
+2.  Find Lucky Integer in an Array  (1394)
+
+Solution  :  class Solution {
+    public int findLucky(int[] arr) {
+        int res=-1;
+        Map<Integer,Integer> map=new HashMap<>();
+        for(int num : arr){
+            map.put(num,map.getOrDefault(num,0)+1);
+        }
+
+        for(Map.Entry<Integer,Integer> e : map.entrySet()){
+            int val=e.getValue();
+            int key=e.getKey();
+            if(val==key){
+                res=val;
+            }
+        }
+        return res;
+    }
+}
