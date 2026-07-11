@@ -1,0 +1,82 @@
+1.  Swap Nodes in Pairs  (24)
+
+Solution :  /**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode swapPairs(ListNode head) {
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+
+        ListNode prev = dummy;
+
+        while (prev.next != null && prev.next.next != null) {
+
+            ListNode ptr = prev.next;
+            ListNode curr = ptr.next;
+
+            ptr.next = curr.next;
+            curr.next = ptr;
+            prev.next = curr;
+
+            prev = ptr;
+        }
+
+        return dummy.next;
+    }
+}
+
+
+
+2.  Remove Duplicates from Sorted List  (83)
+
+Solution :  /**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+        ListNode curr = dummy.next;
+        ListNode ptr = curr.next;
+        while (ptr!= null) {
+            if (curr.val != ptr.val) {
+                curr.next = ptr;
+                curr = curr.next;
+            }
+            ptr = ptr.next;
+
+        }
+        curr.next=null;
+        return dummy.next;
+
+    }
+}
+
+
+3.  Defanging an IP Address  (1108)
+
+Solution :  class Solution {
+    public String defangIPaddr(String address) {
+        String str=address.replace(".","[.]");
+        return str;
+    }
+}
