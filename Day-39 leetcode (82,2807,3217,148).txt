@@ -1,0 +1,158 @@
+1.  Remove Duplicates from Sorted List II  (82)
+
+Solution : /**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+
+        if(head==null || head.next==null){
+            return head;
+        }
+        ListNode dummy=new ListNode(-1);
+        Map<Integer,Integer> map=new LinkedHashMap<>();
+
+        ListNode temp=head;
+        while(temp!=null){
+            map.put(temp.val,map.getOrDefault(temp.val,0)+1);
+            temp=temp.next;
+        }
+        ListNode curr=dummy;
+        for(Map.Entry<Integer,Integer> e : map.entrySet()){
+            int val=e.getValue();
+            int key=e.getKey();
+
+            if(val==1){
+                curr.next=new ListNode(key);
+                curr=curr.next;
+            }
+        }
+
+        return dummy.next;
+    }
+}
+
+
+
+2. Insert Greatest Common Divisors in Linked List  (2807)
+
+Solution : /**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+
+    public static int gcd(int a,int b){
+        int min=Math.min(a,b);
+        int ans=1;
+        for(int i=1;i<=min;i++){
+            if(a%i==0 && b%i==0){
+                ans=i;
+            }
+        }
+        return ans;
+    }
+    public ListNode insertGreatestCommonDivisors(ListNode head) {
+        ListNode ptr=head;
+
+        while(ptr.next!=null){
+            ListNode nextptr=ptr.next;
+            int gcdval=gcd(ptr.val,nextptr.val);
+            ListNode newNode=new ListNode(gcdval);
+            newNode.next=ptr.next;
+            ptr.next=newNode;
+            ptr=nextptr;
+        }
+        return head;
+    }
+}
+
+
+3.  Delete Nodes From Linked List Present in Array  (3217)
+
+
+Solution  :  /**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode modifiedList(int[] nums, ListNode head) {
+        Map<Integer,Integer> map=new HashMap<>();
+        for(int num : nums){
+            map.put(num,map.getOrDefault(num,0)+1);
+        }
+
+        ListNode ptr=head;
+        ListNode dummy=new ListNode(-1);
+        ListNode curr=dummy;
+        while(ptr!=null){
+            if(!map.containsKey(ptr.val)){
+                curr.next=ptr;
+                curr=curr.next;
+            }
+            ptr=ptr.next;
+        }
+        curr.next=null;
+
+        return dummy.next;
+    }
+}
+
+
+4.  Sort List  (148)
+
+Solution :  /**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode sortList(ListNode head) {
+        if(head==null || head.next==null){
+            return head;
+        }
+        ListNode dummy=new ListNode(-1);
+
+        List<Integer> set=new ArrayList<>();
+        ListNode ptr=head;
+        while(ptr!=null){
+            set.add(ptr.val);
+            ptr=ptr.next;
+        }
+
+        set.sort((a,b)->Integer.compare(a,b));
+        ListNode temp=dummy;
+        for(int i : set){
+            temp.next=new ListNode(i);
+            temp=temp.next;
+        }
+
+        return dummy.next;
+        
+    }
+}
+
