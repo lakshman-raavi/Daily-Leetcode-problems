@@ -1,0 +1,54 @@
+# LeetCode Journey – Day 41
+
+Date: 14-07-2026
+
+## Progress
+
+- Problems Solved Today: 4
+
+## Problem Details
+
+### 1. Ransom Note
+
+- Problem Number: 383
+- Difficulty: Easy
+- Concepts Used: HashMap, Frequency Counting, Strings
+- Problem Link: https://leetcode.com/problems/ransom-note/
+
+### 2. Maximum Points You Can Obtain from Cards
+
+- Problem Number: 1423
+- Difficulty: Medium
+- Concepts Used: Sliding Window, Arrays, Prefix Sum
+- Problem Link: https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/
+
+### 3. Max Consecutive Ones III
+
+- Problem Number: 1004
+- Difficulty: Medium
+- Concepts Used: Sliding Window, Two Pointers, Arrays
+- Problem Link: https://leetcode.com/problems/max-consecutive-ones-iii/
+
+### 4. Fruit Into Baskets
+
+- Problem Number: 904
+- Difficulty: Medium
+- Concepts Used: Sliding Window, HashMap, Two Pointers
+- Problem Link: https://leetcode.com/problems/fruit-into-baskets/
+
+## Topics Practiced Today
+
+- Sliding Window
+- Two Pointers
+- HashMap
+- Frequency Counting
+- Arrays
+- Strings
+- Prefix Sum
+
+## Notes
+
+- Practiced both fixed-size and variable-size sliding window techniques.
+- Improved understanding of frequency counting using HashMap.
+- Strengthened two-pointer problem-solving skills.
+- Learned to optimize array problems to linear time complexity.
