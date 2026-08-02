@@ -49,3 +49,11 @@
 **LeetCode:** 877
 **Difficulty:** Medium
 **Concepts Used:** Dynamic Programming, Game Theory, Recursion, Minimax
+
+
+### 8. Number of Arithmetic Triplets
+**LeetCode:** 2367
+**Difficulty:** Easy
+**Concepts Used:** Hash Set, Arrays, Math
+
+
