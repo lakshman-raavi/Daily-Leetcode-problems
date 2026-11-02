@@ -1,0 +1,54 @@
+** Recursion **
+class Solution {
+    public int backtrack(int idx,int[] wt,int[] val,int W){
+        if(idx==0){
+            if(wt[idx]<=W){
+                return val[0];
+            }
+            return 0;
+        }
+
+        int notake=backtrack(idx-1,wt,val,W);
+        int take=Integer.MIN_VALUE;
+        if(wt[idx]<=W){
+            take=val[idx]+backtrack(idx-1,wt,val,W-wt[idx]);
+        }
+
+        return Math.max(take,notake);
+    }
+    public int knapsack01(int[] wt, int[] val, int n, int W) {
+        return backtrack(n-1,wt,val,W);
+    }
+}
+
+
+** Memoization **
+
+class Solution {
+    public int backtrack(int idx,int[] wt,int[] val,int W,int[][] dp){
+        if(idx==0){
+            if(wt[idx]<=W){
+                return val[0];
+            }
+            return 0;
+        }
+        if(dp[idx][W]!=-1){
+            return dp[idx][W];
+        }
+
+        int notake=backtrack(idx-1,wt,val,W,dp);
+        int take=Integer.MIN_VALUE;
+        if(wt[idx]<=W){
+            take=val[idx]+backtrack(idx-1,wt,val,W-wt[idx],dp);
+        }
+
+        return dp[idx][W]=Math.max(take,notake);
+    }
+    public int knapsack01(int[] wt, int[] val, int n, int W) {
+        int[][] dp=new int[n][W+1];
+        for(int i=0;i<n;i++){
+            Arrays.fill(dp[i],-1);
+        }
+        return backtrack(n-1,wt,val,W,dp);
+    }
+}
