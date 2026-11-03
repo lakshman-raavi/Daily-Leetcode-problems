@@ -1,0 +1,38 @@
+class Solution{
+    public int backtrack(int idx,int[] arr,int tar,int[][] dp){
+        if(idx==0){
+            return arr[idx]*tar;
+        }
+        if(dp[idx][tar]!=-1){
+            return dp[idx][tar];
+        }
+        int notake=backtrack(idx-1,arr,tar,dp);
+        int rodlength=idx+1;
+        int take=(int)-1e9;
+        if(rodlength<=tar){
+            take=arr[idx]+backtrack(idx,arr,tar-rodlength,dp);
+        }
+        return dp[idx][tar]=Math.max(take,notake);
+    }
+    public int RodCutting(int price[], int tar) {
+        int n=price.length;
+        int[][] dp=new int[n][tar+1];
+        for(int i=0;i<=tar;i++){
+            dp[0][i]=price[0]*i;
+        }
+
+        for(int idx=1;idx<n;idx++){
+            for(int len=0;len<=tar;len++){
+                int notake=dp[idx-1][len];
+                int rodlength=idx+1;
+                int take=(int)-1e9;
+                if(rodlength<=len){
+                    take=price[idx]+dp[idx][len-rodlength];
+                }
+                dp[idx][len]=Math.max(take,notake);
+    }
+            }
+        
+        return dp[n-1][tar];
+    }
+}
