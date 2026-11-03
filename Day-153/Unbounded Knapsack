@@ -1,0 +1,21 @@
+class Solution {
+    public int baacktrack(int idx,int[] wt,int[] val,int W){
+        if(idx==0){
+            if(W%wt[idx]==0){
+                return val[0];
+            }
+            return 0;
+        }
+
+        int notake=0+backtrack(idx-1,wt,val,W);
+        int take=0;
+        if(wt[idx]<=W){
+            take=val[idx]+backtrack(idx,wt,val,W-val[idx]);
+        }
+
+        return take+notake;
+    }
+    public int unboundedKnapsack(int[] wt, int[] val, int n, int W) {
+        return backtrack(n-1,wt,val,W);
+    }
+}
